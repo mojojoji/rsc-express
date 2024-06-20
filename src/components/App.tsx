@@ -1,18 +1,22 @@
 import { Suspense } from 'react';
+import { Request, Response } from 'express';
 
 export async function DelayedComponent() {
-	await new Promise((resolve) => setTimeout(resolve, 1000));
+	await new Promise((resolve) => setTimeout(resolve, 5000));
 	return <div>Delayed component</div>;
 }
 
-export async function App() {
+export async function App({ req, res }: { req: Request; res: Response }) {
+	res.cookie('cookie', 'value', { maxAge: 900000, httpOnly: true });
+
 	return (
 		<html lang="en">
 			<head>
 				<title>Document</title>
 			</head>
 			<body>
-				<h1>Test react server component</h1>
+				<h1>React Page component</h1>
+				<div>Path : {JSON.stringify(req.query)}</div>
 				<Suspense fallback={<div>Loading...</div>}>
 					{/* @ts-expect-error Async Server Component */}
 					<DelayedComponent />

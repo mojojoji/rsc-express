@@ -7,11 +7,16 @@ const port = 3000;
 
 app.get('/', (req, res) => {
 	/* @ts-expect-error Async Server Component */
-	const { pipe } = renderToPipeableStream(<App />, {
+	const { pipe } = renderToPipeableStream(<App req={req} res={res} />, {
 		bootstrapScripts: ['/main.js'],
 		onShellReady() {
 			res.setHeader('content-type', 'text/html');
 			pipe(res);
+		},
+		onShellError(error) {
+			res.statusCode = 500;
+			res.setHeader('content-type', 'text/html');
+			res.send('<h1>Error rendering page</h1>');
 		},
 	});
 });
