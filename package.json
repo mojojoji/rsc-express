@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc && node out/index.js"
+    "dev": "tsc-watch --build --noClear --onSuccess \"node out/index.js\""
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "prettier": "^3.3.2",
+    "tsc-watch": "^6.2.0",
     "typescript": "^5.4.5"
   },
   "dependencies": {
