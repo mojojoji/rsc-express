@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc-watch --build --noClear --onSuccess \"node --conditions react-server out/index.js\""
+    "dev": "tsc-watch --build --noClear --onSuccess \"node out/index.js\""
   },
   "author": "",
   "license": "ISC",
