@@ -1,13 +1,13 @@
-import { Suspense } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { Request, Response } from 'express';
-import ClientComponent from './ClientComponent';
+import ClientComponent from './ClientComponent.js';
 
 export async function DelayedComponent() {
-	await new Promise((resolve) => setTimeout(resolve, 5000));
+	await new Promise((resolve) => setTimeout(resolve, 2000));
 	return <div>Delayed component</div>;
 }
 
-export async function App({ req, res }: { req: Request; res: Response }) {
+export async function App({ req, res }: { req: Request; res: Response }): Promise<ReactNode> {
 	res.cookie('cookie', 'value', { maxAge: 900000, httpOnly: true });
 
 	return (

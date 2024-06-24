@@ -1,24 +1,21 @@
-import express from 'express';
-import { renderToPipeableStream } from 'react-dom/server';
-import { App } from './components/App';
+import express, { Request, Response } from 'express';
+// import { renderToPipeableStream } from 'react-dom/server';
+import { App } from './components/App.js';
+import { ReactNode } from 'react';
+import { PassThrough } from 'stream';
+
+/* @ts-expect-error No types for package */
+import ReactServerDomWebpack from 'react-server-dom-webpack/server.node';
 
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
+export async function renderRscStream(request: Request, response: Response, component: ReactNode) {}
+
+app.get('/', async (req, res) => {
 	/* @ts-expect-error Async Server Component */
-	const { pipe } = renderToPipeableStream(<App req={req} res={res} />, {
-		bootstrapScripts: ['/main.js'],
-		onShellReady() {
-			res.setHeader('content-type', 'text/html');
-			pipe(res);
-		},
-		onShellError(error) {
-			res.statusCode = 500;
-			res.setHeader('content-type', 'text/html');
-			res.send('<h1>Error rendering page</h1>');
-		},
-	});
+	const { pipe } = ReactServerDomWebpack.renderToPipeableStream(<App req={req} res={res} />);
+	pipe(res);
 });
 
 app.listen(port, () => {
