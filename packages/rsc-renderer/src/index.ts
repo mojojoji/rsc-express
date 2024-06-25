@@ -9,17 +9,7 @@ export function rsc(
 	component: ReactNode | Promise<ReactNode>,
 ): (incoming: http.IncomingMessage, outgoing: http.OutgoingMessage) => void {
 	return (incoming: http.IncomingMessage, outgoing: http.OutgoingMessage) => {
-		const webpackStream = ReactServerDomWebpack.renderToReadableStream(component);
-
-		const acceptsHeader = incoming.headers['accept'];
-		if (acceptsHeader?.includes('text/html')) {
-			const reactDomRenderer = new ReactDomRenderer();
-			reactDomRenderer
-				.renderToReadableStream(webpackStream)
-				.then((stream: any) => Readable.fromWeb(stream).pipe(outgoing));
-		} else {
-			Readable.fromWeb(webpackStream as any).pipe(outgoing);
-		}
+		respondRsc(incoming, outgoing, component);
 	};
 }
 

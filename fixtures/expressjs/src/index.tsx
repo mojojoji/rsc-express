@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { App } from './components/App.js';
-import { rsc, respondRsc } from './lib/index.js';
+import { rsc, respondRsc } from 'rsc-renderer';
 
 const app = express();
 const port = 3000;

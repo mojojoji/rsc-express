@@ -1,5 +1,4 @@
 import { ReactNode, Suspense } from 'react';
-import { Request, Response } from 'express';
 import ClientComponent from './ClientComponent.js';
 
 export async function DelayedComponent() {
