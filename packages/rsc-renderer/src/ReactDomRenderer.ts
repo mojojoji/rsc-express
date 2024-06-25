@@ -1,5 +1,6 @@
 import { Worker } from 'worker_threads';
 import { resolve } from 'path';
+import type { ReadableStream } from 'node:stream/web';
 
 export type ReactRendererIncomingMessage = {
 	type: 'react-server-webpack-stream';
@@ -19,10 +20,9 @@ export class ReactDomRenderer {
 		});
 	}
 
-	async renderToReadableStream(webpackStream: any) {
+	async renderToReadableStream(webpackStream: ReadableStream) {
 		const input: ReactRendererIncomingMessage = { type: 'react-server-webpack-stream', stream: webpackStream };
 		this.worker.postMessage(input, [input.stream as any]);
-
 		return new Promise<ReadableStream>((resolve) => {
 			this.worker.on('message', async ({ type, stream: resStream }: ReactRendererOutgoingMessage) => {
 				if (type === 'react-server-dom-stream') {

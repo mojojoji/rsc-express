@@ -1,4 +1,4 @@
-import { ReactNode, Suspense } from 'react';
+import { Suspense } from 'react';
 import ClientComponent from './ClientComponent.js';
 
 export async function DelayedComponent() {
@@ -6,7 +6,7 @@ export async function DelayedComponent() {
 	return <div>Delayed component</div>;
 }
 
-export async function App({ index, path }: { index: number; path?: string }): Promise<ReactNode> {
+export async function App({ index, path }: { index: number; path?: string }) {
 	// res.cookie('cookie', 'value', { maxAge: 900000, httpOnly: true });
 
 	return (
@@ -19,7 +19,6 @@ export async function App({ index, path }: { index: number; path?: string }): Pr
 				<div>Path : {path ?? 'Path not passed'}</div>
 				<ClientComponent />
 				<Suspense fallback={<div>Loading...</div>}>
-					{/* @ts-expect-error Async Server Component */}
 					<DelayedComponent />
 				</Suspense>
 			</body>

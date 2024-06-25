@@ -1,5 +1,4 @@
-/* @ts-expect-error No types for package */
-import ReactServerDomWebpack from 'react-server-dom-webpack/client.edge';
+import { createFromReadableStream } from 'react-server-dom-webpack/client.edge';
 
 /* @ts-expect-error No types for package */
 import * as ReactDomServer from 'react-dom/server.edge';
@@ -11,7 +10,7 @@ if (parentPort) {
 
 	parentPort.on('message', async ({ type, stream }: ReactRendererIncomingMessage) => {
 		if (type === 'react-server-webpack-stream') {
-			const streamResult = ReactServerDomWebpack.createFromReadableStream(stream, {
+			const streamResult = createFromReadableStream(stream, {
 				ssrManifest: {},
 			});
 

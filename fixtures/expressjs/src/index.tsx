@@ -1,14 +1,13 @@
 import express, { Request, Response } from 'express';
 import { App } from './components/App.js';
 import { rsc, respondRsc } from 'rsc-renderer';
+import { JSX } from 'react';
 
 const app = express();
 const port = 3000;
 
-/* @ts-expect-error */
 app.get('/', rsc(<App index={1} />));
 
-/* @ts-expect-error */
 app.get('/test', (req, res) => respondRsc(req, res, <App path={req.path} index={2} />));
 
 app.listen(port, () => {
