@@ -7,8 +7,8 @@ export async function DelayedComponent() {
 	return <div>Delayed component</div>;
 }
 
-export async function App({ req, res }: { req: Request; res: Response }): Promise<ReactNode> {
-	res.cookie('cookie', 'value', { maxAge: 900000, httpOnly: true });
+export async function App({ index, path }: { index: number; path?: string }): Promise<ReactNode> {
+	// res.cookie('cookie', 'value', { maxAge: 900000, httpOnly: true });
 
 	return (
 		<html lang="en">
@@ -16,8 +16,8 @@ export async function App({ req, res }: { req: Request; res: Response }): Promis
 				<title>Document</title>
 			</head>
 			<body>
-				<h1>React Page component</h1>
-				<div>Path : {JSON.stringify(req.query)}</div>
+				<h1>React Page component: {index}</h1>
+				<div>Path : {path ?? 'Path not passed'}</div>
 				<ClientComponent />
 				<Suspense fallback={<div>Loading...</div>}>
 					{/* @ts-expect-error Async Server Component */}

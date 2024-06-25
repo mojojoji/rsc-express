@@ -1,27 +1,15 @@
-import { Readable } from 'node:stream';
-
-/* @ts-expect-error No types for package */
-import ReactServerDomWebpack from 'react-server-dom-webpack/server.edge';
-
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { App } from './components/App.js';
-import { ReactDomRenderer } from './ReactDomRenderer.js';
+import { rsc, respondRsc } from './lib/index.js';
 
 const app = express();
 const port = 3000;
 
-const reactDomRenderer = new ReactDomRenderer();
+/* @ts-expect-error */
+app.get('/', rsc(<App index={1} />));
 
-app.get('/', async (req, res) => {
-	/* @ts-expect-error Async Server Component */
-	const webpackStream = await ReactServerDomWebpack.renderToReadableStream(<App req={req} res={res} />);
-
-	let stream: ReadableStream = webpackStream;
-	if (req.accepts('text/html')) {
-		stream = await reactDomRenderer.renderToReadableStream(webpackStream);
-	}
-	Readable.fromWeb(stream as any).pipe(res);
-});
+/* @ts-expect-error */
+app.get('/test', (req, res) => respondRsc(req, res, <App path={req.path} index={2} />));
 
 app.listen(port, () => {
 	console.log(`Server is running at http://localhost:${port}`);
