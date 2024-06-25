@@ -5,9 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm:serve-*\"",
-    "serve-renderer": "tsc && node out/index.renderer.js",
-    "serve-app": "tsc-watch --build --noClear --onSuccess \"node --conditions react-server out/index.js\"",
+    "dev": "tsc-watch --build --noClear --onSuccess \"node --conditions react-server out/index.js\"",
     "build": "tsc"
   },
   "author": "",
@@ -15,7 +13,6 @@
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "concurrently": "^8.2.2",
     "prettier": "^3.3.2",
     "tsc-watch": "^6.2.0",
     "typescript": "^5.5.2"
