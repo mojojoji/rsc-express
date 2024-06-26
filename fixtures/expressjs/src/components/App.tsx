@@ -7,8 +7,6 @@ export async function DelayedComponent() {
 }
 
 export async function App({ index, path }: { index: number; path?: string }) {
-	// res.cookie('cookie', 'value', { maxAge: 900000, httpOnly: true });
-
 	return (
 		<html lang="en">
 			<head>
@@ -17,10 +15,12 @@ export async function App({ index, path }: { index: number; path?: string }) {
 			<body>
 				<h1>React Page component: {index}</h1>
 				<div>Path : {path ?? 'Path not passed'}</div>
+				<div id="root"></div>
 				<ClientComponent />
 				<Suspense fallback={<div>Loading...</div>}>
 					<DelayedComponent />
 				</Suspense>
+				<script type="module" src="/@vite/client"></script>
 			</body>
 		</html>
 	);

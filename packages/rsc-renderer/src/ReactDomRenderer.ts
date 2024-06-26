@@ -5,6 +5,7 @@ import type { ReadableStream } from 'node:stream/web';
 export type ReactRendererIncomingMessage = {
 	type: 'react-server-webpack-stream';
 	stream: ReadableStream;
+	ssrManifest: any;
 };
 
 export type ReactRendererOutgoingMessage = {
@@ -20,8 +21,12 @@ export class ReactDomRenderer {
 		});
 	}
 
-	async renderToReadableStream(webpackStream: ReadableStream) {
-		const input: ReactRendererIncomingMessage = { type: 'react-server-webpack-stream', stream: webpackStream };
+	async renderToReadableStream(webpackStream: ReadableStream, ssrManifest: any = {}) {
+		const input: ReactRendererIncomingMessage = {
+			type: 'react-server-webpack-stream',
+			stream: webpackStream,
+			ssrManifest,
+		};
 		this.worker.postMessage(input, [input.stream as any]);
 		return new Promise<ReadableStream>((resolve) => {
 			this.worker.on('message', async ({ type, stream: resStream }: ReactRendererOutgoingMessage) => {

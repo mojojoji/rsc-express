@@ -2,8 +2,8 @@
     "compilerOptions": {
         "target": "es2016",
         "jsx": "react-jsx",
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
         "outDir": "dist",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,

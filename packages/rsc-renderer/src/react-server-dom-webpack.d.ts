@@ -1,5 +1,5 @@
 declare module 'react-server-dom-webpack/server.edge' {
-	export function renderToReadableStream(component: ReactNode | Promise<ReactNode>): any;
+	export function renderToReadableStream(component: ReactNode | Promise<ReactNode>, map: any): any;
 }
 
 declare module 'react-server-dom-webpack/client.edge' {
