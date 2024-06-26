@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsc-watch --build --noClear --onSuccess \"node --conditions react-server dist/index.js\"",
-    "build": "tsc"
+    "dev": "node scripts/build.js"
   },
   "author": "",
   "license": "ISC",
