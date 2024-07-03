@@ -4,6 +4,7 @@
   "description": "RSC router to render react server components with libraries like express, hono, Koa etc",
   "author": "Joji Augustine",
   "license": "ISC",
+  "private": true,
   "workspaces": [
     "packages/*",
     "fixtures/*"
