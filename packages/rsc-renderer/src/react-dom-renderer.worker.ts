@@ -5,6 +5,29 @@ import * as ReactDomServer from 'react-dom/server.edge';
 import { parentPort } from 'node:worker_threads';
 import { ReactRendererIncomingMessage, ReactRendererOutgoingMessage } from './ReactDomRenderer.js';
 
+// const clientManifest = {
+// 	'file:///Users/joji/Work/github.com/facebook/react/fixtures/flight/src/ShowMore.js': {
+// 		id: 31,
+// 		chunks: [900, 'static/js/client7.858b224c.chunk.js'],
+// 		name: '*',
+// 	},
+// };
+
+// const ssrManifest = {
+// 	moduleLoading: {
+// 		prefix: '/',
+// 		crossOrigin: null,
+// 	},
+// 	moduleMap: {
+// 		'31': {
+// 			'*': {
+// 				specifier: 'file:///Users/joji/Work/github.com/facebook/react/fixtures/flight/src/ShowMore.js',
+// 				name: '*',
+// 			},
+// 		},
+// 	},
+// };
+
 if (parentPort) {
 	parentPort.postMessage({ name: 'Hello' });
 
